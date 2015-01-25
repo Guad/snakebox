@@ -14,18 +14,30 @@
                         <input type="file" name="files" >
                         <input type="submit" value="Upload Torrent">
                     </form>
-
-                    <h3>Currently Seeding</h3>
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Upload Speed</th>
-                            <th>Ratio</th>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>
+        <h3>Active Torrents</h3>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Speed</th>
+                    <th>ETA</th>
+                    <th>Action</th>
+                </tr>
+                {%if torrents %}
+                    {% for torrents in torrents %}
+                        <tr>
+                            <td>{% torrent.name %}</td>
+                            <td>{% torrent.status %} ({% torrent.percentdone * 100 %})</td>
+                            <td>{%torrent.rateDownload%}</td>
+                            <td>{% torrent.eta %}</td>
+                            <td>x</td>
+                        </tr>
+                    {{ endfor }}
+                {{endif}}
+            </table>
     </div>
 </body>
 </html>
