@@ -13,7 +13,7 @@ app = flask.Flask(__name__)  # Initialize our application
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024  # Set the upload limit to 1MiB
 app.secret_key = config['SECRET_KEY']
 
-tc = transmissionrpc.Client('localhost', port=9091)
+tc = transmissionrpc.Client('localhost', port=9091, user=config['USERNAME'], password=config['PASSWORD'])
 
 
 def processNewTorrent(torrentfile):
@@ -28,6 +28,7 @@ def index():
             if secure_filename(f.filename):
                 f.save('static/torrents/%s' % secure_filename(f.filename))
                 print 'Uploaded file "%s"' % secure_filename(f.filename)
+                processNewTorrent(secure_filename(f.filename))
                 flask.flash(flask.Markup('Successfully uploaded torrent %s. Download starting...') % secure_filename(
                     f.filename))
             else:
