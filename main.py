@@ -47,11 +47,11 @@ def index():
         torrentlist = tc.get_torrents()
         torrents = []
         for torrent in torrentlist:
-            torrents.append({"name":torrent['name'],
-                             "status":torrent['status'],
-                             "percentDone":torrent['percentDone'],
-                             "rateDownload":torrent['rateDownload'],
-                             "torrent.eta":handleEta(torrent['eta'])
+            torrents.append({"name":torrentlist[torrent]['name'],
+                             "status":torrentlist[torrent]['status'],
+                             "percentDone":torrentlist[torrent]['percentDone'],
+                             "rateDownload":torrentlist[torrent]['rateDownload'],
+                             "torrent.eta":handleEta(torrentlist[torrent]['eta'])
                              })
 
         return flask.render_template('index.html', torrents=torrents)
