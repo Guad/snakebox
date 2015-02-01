@@ -20,6 +20,12 @@ def processNewTorrent(torrentfile):
     torrentID = tc.add_torrent('file:///home/phil/snakebox/static/torrents/%s' % torrentfile)
     return torrentID
 
+def handleeta(timedelta):
+    try: 
+        return str(timedelta.seconds)
+    except ValueError:
+        return 'Done!'
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if flask.request.method == 'POST':
