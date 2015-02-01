@@ -29,10 +29,10 @@
                 {% if torrents %}
                     {% for torrents in torrents %}
                         <tr>
-                            <td>{% torrent.name %}</td>
-                            <td>{% torrent.status %} ({% torrent.percentdone * 100 %})</td>
-                            <td>{%torrent.rateDownload%}</td>
-                            <td>{% torrent.eta %}</td>
+                            <td>{{ torrent.name }}</td>
+                            <td>{{ torrent.status }} ({{ torrent.percentdone * 100 }})</td>
+                            <td>{{ torrent.rateDownload }}</td>
+                            <td>{{ torrent.eta }}</td>
                             <td>x</td>
                         </tr>
                     {% endfor %}
