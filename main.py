@@ -17,7 +17,7 @@ tc = transmissionrpc.Client('localhost', port=9091, user=config['USERNAME'], pas
 
 
 def processNewTorrent(torrentfile):
-    torrentID = tc.add_torrent(torrentfile)
+    torrentID = tc.add_torrent('static/torrents/%s' % torrentfile)
     return torrentID
 
 @app.route('/', methods=['GET', 'POST'])
