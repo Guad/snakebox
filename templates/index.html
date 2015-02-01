@@ -26,7 +26,7 @@
                     <th>ETA</th>
                     <th>Action</th>
                 </tr>
-                {%if torrents %}
+                {% if torrents %}
                     {% for torrents in torrents %}
                         <tr>
                             <td>{% torrent.name %}</td>
@@ -35,8 +35,8 @@
                             <td>{% torrent.eta %}</td>
                             <td>x</td>
                         </tr>
-                    {{ endfor }}
-                {{endif}}
+                    {% endfor %}
+                {% endif %}
             </table>
     </div>
 </body>
