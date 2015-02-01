@@ -40,4 +40,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()  # Run the app
+    app.run(port=1234)  # Run the app
