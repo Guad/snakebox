@@ -26,7 +26,7 @@ def handleeta(timedelta):
     except ValueError:
         return 'Done!'
 
-environment.filters['custom_urlencode_filter'] = custom_urlencode_filter
+environment.filters['handleeta'] = handleeta
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
