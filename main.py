@@ -42,7 +42,8 @@ def index():
             tmp = {"name":torrent.name,
                    "status":torrent.status,
                    "percentDone":torrent.percentDone,
-                   "rateDownload":torrent.rateDownload
+                   "rateDownload":torrent.rateDownload,
+                   "rateUpload":torrent.rateUpload
                    }
             try:
                 hours, remainder = divmod(torrent.eta.seconds, 3600)

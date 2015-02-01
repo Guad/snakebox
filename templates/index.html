@@ -22,7 +22,8 @@
                 <tr>
                     <th>Name</th>
                     <th>Status</th>
-                    <th>Speed</th>
+                    <th>Download Speed</th>
+                    <th>Upload Speed</th>
                     <th>ETA</th>
                     <th>Action</th>
                 </tr>
@@ -31,9 +32,10 @@
                         <tr>
                             <td>{{ torrent.name }}</td>
                             <td>{{ torrent.status }} ({{ torrent.percentDone * 100 }}%)</td>
-                            <td>{{ torrent.rateDownload }}</td>
+                            <td>{{ torrent.rateDownload }}bps</td>
+                            <td>{{torrent.rateUpload }}bps</td>
                             <td>{{ torrent.eta }} </td>
-                            <td>x</td>
+                            <td>[Pause][Continue]</td>
                         </tr>
                     {% endfor %}
                 {% endif %}
