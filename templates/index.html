@@ -30,9 +30,9 @@
                     {% for torrent in torrents %}
                         <tr>
                             <td>{{ torrent.name }}</td>
-                            <td>{{ torrent.status }} ({{ torrent.percentDone * 100 }})</td>
+                            <td>{{ torrent.status }} ({{ torrent.percentDone * 100 }}%)</td>
                             <td>{{ torrent.rateDownload }}</td>
-                            <td>{{ torrent.eta.seconds | handleeta }} </td>
+                            <td>{{ torrent.eta }} </td>
                             <td>x</td>
                         </tr>
                     {% endfor %}

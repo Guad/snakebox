@@ -22,11 +22,11 @@ def processNewTorrent(torrentfile):
 
 def handleeta(timedelta):
     try: 
-        return str(timedelta.seconds)
+        hours, remainder = divmod(timedelta.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        return '%s:%s:%s' % (hours, minutes, seconds)
     except ValueError:
         return 'Done!'
-
-flask.environment.filters['handleeta'] = handleeta
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -44,7 +44,17 @@ def index():
 
         return flask.redirect(flask.url_for('index'))  # Upload done, refresh.
     else:
-        return flask.render_template('index.html', torrents=tc.get_torrents())
+        torrentlist = tc.get_torrents()
+        torrents = []
+        for torrent in torrentlist:
+            torrents.append({"name":torrent['name'],
+                             "status":torrent['status'],
+                             "percentDone":torrent['percentDone'],
+                             "rateDownload":torrent['rateDownload'],
+                             "torrent.eta":handleEta(torrent['eta'])
+                             })
+
+        return flask.render_template('index.html', torrents=torrents)
 
 
 if __name__ == '__main__':
