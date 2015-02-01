@@ -17,7 +17,7 @@ tc = transmissionrpc.Client('localhost', port=9091, user=config['USERNAME'], pas
 
 
 def processNewTorrent(torrentfile):
-    torrentID = tc.add_torrent('static/torrents/%s' % torrentfile)
+    torrentID = tc.add_torrent('file:///home/phil/snakebox/static/torrents/%s' % torrentfile)
     return torrentID
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,4 +40,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=1234)  # Run the app
+    app.debug = True
+    app.run(port=1234, host='0.0.0.0')  # Run the app

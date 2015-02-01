@@ -27,12 +27,12 @@
                     <th>Action</th>
                 </tr>
                 {% if torrents %}
-                    {% for torrents in torrents %}
+                    {% for torrent in torrents %}
                         <tr>
                             <td>{{ torrent.name }}</td>
-                            <td>{{ torrent.status }} ({{ torrent.percentdone * 100 }})</td>
+                            <td>{{ torrent.status }} ({{ torrent.percentDone * 100 }})</td>
                             <td>{{ torrent.rateDownload }}</td>
-                            <td>{{ torrent.eta }}</td>
+                            <td>{{ torrent.eta.seconds | handleeta }} </td>
                             <td>x</td>
                         </tr>
                     {% endfor %}
