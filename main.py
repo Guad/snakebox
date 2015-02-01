@@ -20,14 +20,6 @@ def processNewTorrent(torrentfile):
     torrentID = tc.add_torrent('file:///home/phil/snakebox/static/torrents/%s' % torrentfile)
     return torrentID
 
-def handleeta(timedelta):
-    try: 
-        hours, remainder = divmod(timedelta.seconds, 3600)
-        minutes, seconds = divmod(remainder, 60)
-        return '%s:%s:%s' % (hours, minutes, seconds)
-    except ValueError:
-        return 'Done!'
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if flask.request.method == 'POST':
@@ -47,12 +39,19 @@ def index():
         torrentlist = tc.get_torrents()
         torrents = []
         for torrent in torrentlist:
-            torrents.append({"name":torrentlist[torrent]['name'],
-                             "status":torrentlist[torrent]['status'],
-                             "percentDone":torrentlist[torrent]['percentDone'],
-                             "rateDownload":torrentlist[torrent]['rateDownload'],
-                             "torrent.eta":handleEta(torrentlist[torrent]['eta'])
-                             })
+            tmp = {"name":torrent.name,
+                   "status":torrent.status,
+                   "percentDone":torrent.percentDone,
+                   "rateDownload":torrent.rateDownload
+                   })
+            try:
+                hours, remainder = divmod(torrent.eta.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                tmp['eta'] = '%s:%s:%s' % (hours, minutes, seconds)
+            except ValueError:
+                tmp['eta'] = 'Done!'
+            torrents.append(tmp)
+
 
         return flask.render_template('index.html', torrents=torrents)
 
