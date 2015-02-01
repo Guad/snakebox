@@ -26,7 +26,7 @@ def handleeta(timedelta):
     except ValueError:
         return 'Done!'
 
-environment.filters['handleeta'] = handleeta
+flask.environment.filters['handleeta'] = handleeta
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
